@@ -1,0 +1,19 @@
+table.skillset
+  caption.sr-only My skillset
+  tbody
+    -
+      const rows = [
+        {type: "Adobe Photoshop", pct: "78%"},
+        {type: "Adobe Illustrator", pct: "42%"},
+        {type: "Adobe XD", pct: "90%"},
+        {type: "HTML", pct: "91%"},
+        {type: "CSS", pct: "88%"},
+        {type: "JavaScript", pct: "86%"},
+        {type: "React JS", pct: "94%"},
+      ]
+    each row in rows
+      tr.skill
+        th(scope="row").skill__type= row.type
+        td.skill__value
+          p.sr-only= row.pct
+          .skill__value__bg(data-pct=row.pct)

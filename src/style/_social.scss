@@ -1,0 +1,57 @@
+.social {
+  display: inline-block;
+}
+
+.social__username {
+  margin-bottom: 0;
+}
+
+.social__items {
+  display: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.social__item {
+  display: inline-block;
+  vertical-align: baseline;
+  line-height: $line-height-sm;
+}
+
+.social__link {
+  display: inline-block;
+  .icon {
+    fill: theme-color("secondary");
+  }
+
+  @each $item, $dimension in $social-dimensions {
+    $width: nth($dimension, 1);
+    $height: nth($dimension, 2);
+    &[data-to="#{$item}"] .icon {
+      width: $width;
+      height: $height;
+    }
+  }
+}
+
+@include media-breakpoint-up("md") {
+  .social__username {
+    display: none;
+  }
+  .social__items {
+    display: inline-block;
+  }
+}
+
+html[lang="en"] {
+  .social__item + .social__item {
+    margin-left: 34px;
+  }
+}
+
+html[lang="ar"] {
+  .social__item + .social__item {
+    margin-right: 34px;
+  }
+}

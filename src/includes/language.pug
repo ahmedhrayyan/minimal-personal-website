@@ -1,0 +1,9 @@
+div(class="lang")
+  - const getIcon = icon => require("../images/icons.svg") + '#' + icon
+  a.lang__btn(href="./ar" data-lang="ar" aria-label="to Arabic version")
+    svg.icon.svg-icon(focusable="false")
+      use(xlink:href=getIcon("arabic"))
+  a.lang__btn(href="./" data-lang="en" aria-label="to English version" aria-disabled="true" tabindex="-1")
+    svg.icon.svg-icon(focusable="false")
+      use(xlink:href=getIcon("english"))
+

@@ -1,0 +1,14 @@
+.contact-info__heading {
+  margin-bottom: res-unit(9px);
+}
+
+.contact-info__sub-heading {
+  margin-bottom: res-unit(33px);
+}
+
+.contact-info__item {
+  margin-bottom: 0;
+  & + & {
+    margin-top: res-unit(13px);
+  }
+}

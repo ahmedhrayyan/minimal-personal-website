@@ -1,0 +1,20 @@
+.gallery
+  .gallery__items(aria-live="polite")
+    //- must be two items active
+    .gallery__item.active
+      img(src=require("../images/img-1.jpg"), alt="image of mine 1")
+    .gallery__item.active
+      img(src=require("../images/img-2.jpg"), alt="image of mine 2")
+    .gallery__item
+      img(src=require("../images/img-3.jpg"), alt="image of mine 3")
+  //- end gallery__items
+  - const getIcon = icon => require("../images/icons.svg") + '#' + icon
+  button.gallery__control(type="button" data-to="next")
+    p.sr-only next image
+    svg.icon.svg-icon(focusable="false")
+      use(xlink:href=getIcon("arrow"))
+  //- there is no previous at intial loading
+  button.gallery__control(type="button" data-to="prev" disabled="")
+    p.sr-only previous image
+    svg.icon.svg-icon.flipped(focusable="false")
+      use(xlink:href=getIcon("arrow"))

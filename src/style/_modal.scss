@@ -1,0 +1,166 @@
+.modal--open {
+  overflow: hidden;
+}
+// Container that the modal scrolls within
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: $zindex-modal;
+  display: none;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  // Prevent Chrome on Windows from adding a focus outline. For details, see
+  // https://github.com/twbs/bootstrap/pull/10951.
+  outline: 0;
+  // We deliberately don't use `-webkit-overflow-scrolling: touch;` due to a
+  // gnarly iOS Safari bug: https://bugs.webkit.org/show_bug.cgi?id=158342
+  // See also https://github.com/twbs/bootstrap/issues/17695
+}
+
+// Shell div to position the modal with bottom padding
+.modal__dialog {
+  position: relative;
+  z-index: $zindex-modal-dialog;
+  width: auto;
+  margin: $modal-dialog-margin;
+  // allow clicks to pass through for custom click handling to close modal
+  pointer-events: none;
+  @include transition($modal-transition);
+  transform: $modal-fade-transform;
+  opacity: 0;
+
+  .modal.show & {
+    transform: $modal-show-transform;
+    opacity: 1;
+  }
+}
+
+// Actual modal
+.modal__content {
+  position: relative;
+  width: 100%; // Ensure `.modal-content` extends the full width of the parent `.modal-dialog`
+  // counteract the pointer-events: none; in the .modal-dialog
+  color: $modal-content-color;
+  pointer-events: auto;
+  background-color: $modal-content-bg;
+  background-clip: padding-box;
+  border: $modal-content-border-width solid $modal-content-border-color;
+  @include border-radius($modal-content-border-radius);
+  @include box-shadow($modal-content-box-shadow-xs);
+  // Remove focus outline from opened modal
+  outline: 0;
+}
+
+.modal__header {
+  display: flex;
+  align-items: center; // so the close btn always stays on the upper right corner
+  justify-content: space-between; // Put modal header elements (title and dismiss) on opposite ends
+  padding: $modal-header-padding;
+  @include border-top-radius($modal-content-border-radius);
+}
+
+.modal__close {
+  @extend .btn;
+  padding-right: 4px;
+  padding-left: 4px;
+  // auto on the left force icon to the right even when there is no .modal-title
+  // margin: (-$modal-header-padding-y) (-$modal-header-padding-x) (-$modal-header-padding-y) auto;
+  > svg {
+    width: 14px;
+    height: 14px;
+    fill: none;
+    stroke: theme-color("secondary");
+    stroke-width: 2px;
+  }
+}
+
+// Title text within header
+.modal__title {
+  display: inline-block;
+  position: relative;
+  margin-bottom: 0;
+  line-height: $modal-title-line-height;
+  @include font-size(24px);
+  &:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    width: calc(100% + 40px);
+    height: 1px;
+    background: theme-color("secondary");
+  }
+}
+
+// Modal body
+// Where all modal content resides (sibling of .modal-header and .modal-footer)
+.modal__body {
+  position: relative;
+  // Enable `flex-grow: 1` so that the body take up as much space as possible
+  // when should there be a fixed height on `.modal-dialog`.
+  // flex: 1 1 auto;
+  padding: $modal-inner-padding;
+}
+
+// Footer (for actions)
+.modal__footer {
+  display: flex;
+  align-items: center; // vertically center
+  justify-content: flex-end; // Right align buttons with flex property because text-align doesn't work on flex items
+  padding: 0 $modal-inner-padding $modal-inner-padding;
+  @include border-bottom-radius($modal-content-border-radius);
+  // Easily place margin between footer elements
+  > :not(:first-child) { margin-left: .25rem; }
+  > :not(:last-child) { margin-right: .25rem; }
+}
+
+// Modal background
+.modal__bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: $modal-backdrop-bg;
+  opacity: 0;
+  @include transition($modal-bg-transition);
+  .modal.show & { opacity: $modal-backdrop-opacity; }
+}
+
+// Measure scrollbar width for padding body during modal show/hide
+.modal-scrollbar-measure {
+  position: absolute;
+  top: -9999px;
+  width: 50px;
+  height: 50px;
+  overflow: scroll;
+}
+
+// Scale up the modal
+@include media-breakpoint-up(sm) {
+  // Automatically set modal's width for larger viewports
+  .modal__dialog {
+    max-width: $modal-md;
+    margin: $modal-dialog-margin-y-sm-up auto;
+  }
+
+  .modal__content {
+    @include box-shadow($modal-content-box-shadow-sm-up);
+  }
+
+  .modal--sm { max-width: $modal-sm; }
+}
+
+@include media-breakpoint-up(lg) {
+  .modal--lg,
+  .modal--xl {
+    max-width: $modal-lg;
+  }
+}
+
+html[lang="ar"] {
+  .modal__title:after {
+    right: 0;
+  }
+}

@@ -1,0 +1,11 @@
+.social
+  - const username = 'ahamidEng', socialSites = ['twitter', 'behance', 'dribbble', 'codepen', 'github']
+  - const getIcon = icon => require("../images/icons.svg") + '#' + icon
+  p.social__username= '@' + username
+  ul.social__items
+    each site in socialSites
+      li.social__item
+        a.social__link(href=`https://${site}.com/${username}` target="_blank" data-to=site aria-label=`my ${site} account`)
+          svg.icon.svg-icon(focusable="false")
+            use(xlink:href=getIcon(site))
+

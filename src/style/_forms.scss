@@ -1,0 +1,101 @@
+.form-control {
+  display: block;
+  width: 100%;
+  height: $input-height;
+  padding: $input-padding-y $input-padding-x;
+  font-family: $input-font-family;
+  @include font-size($input-font-size);
+  font-weight: $input-font-weight;
+  line-height: $input-line-height;
+  color: $input-color;
+  background-color: $input-bg;
+  background-clip: padding-box;
+  border: $input-border-width solid $input-border-color;
+
+  // Note: This has no effect on <select>s in some browsers, due to the limited stylability of `<select>`s in CSS.
+  @include border-radius($input-border-radius, 0);
+
+  @include box-shadow($input-box-shadow);
+  @include transition($input-transition);
+
+  // Unstyle the caret on `<select>`s in IE10+.
+  &::-ms-expand {
+    background-color: transparent;
+    border: 0;
+  }
+
+  // Customize the `:focus` state to imitate native WebKit styles.
+  @include form-control-focus();
+
+  // Placeholder
+  &::placeholder {
+    color: $input-placeholder-color;
+    // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526.
+    opacity: 1;
+  }
+
+  // Disabled and read-only inputs
+  //
+  // HTML5 says that controls under a fieldset > legend:first-child won't be
+  // disabled if the fieldset is disabled. Due to implementation difficulty, we
+  // don't honor that edge case; we style them as disabled anyway.
+  &:disabled,
+  &[readonly] {
+    background-color: $input-disabled-bg;
+    // iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655.
+    opacity: 1;
+  }
+}
+
+.form-control--lg {
+  @extend .form-control;
+  height: $input-height-lg;
+  padding: $input-padding-y-lg $input-padding-x-lg;
+  @include font-size($input-font-size-lg);
+  line-height: $input-line-height-lg;
+  @include border-radius($input-border-radius-lg);
+}
+
+textarea.form-control {
+  height: $input-textarea-height;
+}
+textarea.form-control--lg {
+  height: $input-textarea-height-lg;
+}
+
+form[data-need-validation] {
+  // for validation alert element
+  position: relative;
+}
+
+form[data-need-validation][data-was-validated] {
+  .form-control:invalid {
+    border-color: red;
+  }
+  .form-control:focus:invalid {
+    border-color: $input-focus-border-color;
+  }
+}
+
+.form__validation-alert {
+  position: absolute;
+  left: 0;
+  z-index: 100;
+  @include font-size(14px);
+  padding: 2px 8px;
+  margin-top: 6px; // the same value as before border-bottom
+  color: color-yiq(theme-color("secondary"));
+  background: theme-color("secondary");
+  &:before {
+    position: absolute;
+    top: -6px;
+    left: 4px;
+    content: "";
+    // make triangle
+    width: 0;
+    height: 0;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+    border-bottom: 6px solid theme-color("secondary");
+  }
+}

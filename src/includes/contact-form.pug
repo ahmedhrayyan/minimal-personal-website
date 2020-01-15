@@ -1,0 +1,23 @@
+#no-contact-form.modal(tabindex="-1" role="dialog" aria-labelledby="modal__title-no-contact" aria-modal="true")
+  .modal__bg
+  .modal__dialog(role="document")
+    .modal__content
+      header.modal__header
+        h5#modal__title-no-blog.modal__title Sorry
+        button.modal__close(type="button" data-dismiss="modal" aria-label="Close")
+          svg.svg-icon
+            use(xlink:href=require("../images/icons.svg") + "#close")
+      main.modal__body
+        p The contact form isn't currently working, sorry about that. If you want to reach me, please send me an email at
+          |
+          |
+          a(href="mailto:ahamidEng@outlook.com") ahamidEng@outlook.com
+      footer.modal__footer
+        button(type="button" class="btn-primary" data-dismiss="modal") Got it
+.contact-form
+  h3.contact-form__heading Send me a message!
+  form(autocomplete="off" novalidate="" data-need-validation="")
+    input.form-control--lg.item(type="text" placeholder="Name" required="")
+    input.form-control--lg.item(type="email" placeholder="Email" required="")
+    textarea.form-control--lg.item(placeholder="Your message..." required="")
+    button.btn-primary--lg.item(type="submit") Send your message

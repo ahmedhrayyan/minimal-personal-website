@@ -1,0 +1,92 @@
+body {
+  overflow-y: scroll; // if you can't kill it.. join it :)
+}
+
+.is-running {
+  overflow: hidden;
+}
+
+.carousel__item {
+  display: none;
+  @include transition($carousel-transition);
+  backface-visibility: hidden;
+}
+
+.carousel__item.active,
+.carousel__item--next,
+.carousel__item--prev {
+  display: block;
+}
+
+.carousel__item--next,
+.carousel__item--prev {
+  will-change: transform;
+}
+
+.active.carousel__item--bottom,
+.active.carousel__item--top {
+  position: absolute;
+  top: $page-padding-y;
+  width: calc(100% - #{$grid-gutter-width});
+}
+
+// the first selector is for giving the next item a style then remove it by adding gallery__item--left to it (for transition)
+.carousel__item--next:not(.carousel__item--top),
+.active.carousel__item--bottom {
+  transform: translateY(400px);
+  opacity: 0;
+}
+
+.carousel__item--prev:not(.carousel__item--bottom),
+.active.carousel__item--top {
+  transform: translateY(-400px);
+  opacity: 0;
+}
+
+// Measure scrollbar width for padding body during modal show/hide
+.modal-scrollbar-measure {
+  position: absolute;
+  top: -9999px;
+  width: 50px;
+  height: 50px;
+  overflow: scroll;
+}
+
+.carousel__nav {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 0;
+  margin-left: -($carousel-nav-item-actual-w - $carousel-nav-item-w) / 2;
+}
+
+.carousel__nav__item {
+  button {
+    @extend .btn;
+    position: relative;
+    width: $carousel-nav-item-actual-w;
+    height: $carousel-nav-item-actual-h;
+    &:after {
+      content: "";
+      position: absolute;
+      width: $carousel-nav-item-w;
+      height: $carousel-nav-item-h;
+      border: 1px solid $carousel-nav-item-bg;
+      @include border-radius($carousel-nav-item-bdra);
+      background-color: transparent;
+
+      // centring
+      left: 50%;
+      top: 50%;
+      margin-top: -($carousel-nav-item-h / 2);
+      margin-left: -($carousel-nav-item-w / 2);
+    }
+  }
+  &[data-active] button:after {
+    background: $carousel-nav-item-bg;
+  }
+}
+
+.carousel__subheading {
+  @include font-size(20px);
+  margin-bottom: $carousel-subheading-mb;
+}

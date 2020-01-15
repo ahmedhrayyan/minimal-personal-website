@@ -1,0 +1,91 @@
+.lang__btn {
+  @extend .btn;
+
+  .icon {
+    fill: theme-color("fade");
+  }
+
+  // what is disabled is what is active :)
+  &[aria-disabled="true"] {
+    pointer-events: none;
+    // svg
+    .icon {
+      fill: $body-color;
+    }
+  }
+}
+
+.lang--rotated {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  &:after,
+  &:before {
+    content: "";
+    display: inline-block;
+    width: 1px;
+    height: 32px;
+    background-color: theme-color("divider");
+  }
+
+
+  @media (min-height: 420px) {
+    &:after, &:before {
+      height: 62px;
+    }
+  }
+
+
+  > .lang__btn {
+    width: 20px; // make width bigger to be more easy to use
+
+    padding-top: $lang-btn-padding;
+    padding-bottom: $lang-btn-padding;
+
+    &[data-lang="ar"] {
+      // svg
+      > .icon {
+        width: $lang-btn-ar-icon-h; // as we're on the rotated version
+        height: $lang-btn-ar-icon-w; // as we're on the rotated version
+      }
+    }
+
+    &[data-lang="en"] {
+      // svg
+      > .icon {
+        width: $lang-btn-en-icon-h; // as we're on the rotated version
+        height: $lang-btn-en-icon-w; // as we're on the rotated version
+      }
+    }
+  }
+}
+
+.lang > .lang__btn {
+  &[data-lang="ar"] > .icon {
+    width: $lang-btn-ar-icon-w;
+    height: $lang-btn-ar-icon-h;
+  }
+
+  &[data-lang="en"] > .icon {
+    width: $lang-btn-en-icon-w;
+    height: $lang-btn-en-icon-h;
+  }
+}
+
+html[lang="en"] {
+  .lang > .lang__btn:first-child {
+    padding-right: $lang-btn-padding;
+  }
+  .lang > .lang__btn:last-child {
+    padding-left: $lang-btn-padding;
+  }
+}
+
+html[lang="ar"] {
+  .lang > .lang__btn:first-child {
+    padding-left: $lang-btn-padding;
+  }
+  .lang > .lang__btn:last-child {
+    padding-right: $lang-btn-padding;
+  }
+}
