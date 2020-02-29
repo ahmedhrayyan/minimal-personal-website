@@ -1,0 +1,110 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
+    meta(name="viewport", content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0")
+    meta(name="description" content="Discover more about Ahmad Hamid, a web developer & designer and a computer science student")
+    meta(name="author" content="Ahmad Hamid")
+    meta(name="keywords" content="HTML, CSS, JAVASCRIT, REACT, WEB DEVELOPER, WEB DESIGNER, PORTFOLIO, PERSONAL WEBSITE")
+    link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=EB+Garamond|Oswald&display=swap")
+    title Ahmad Hamid
+  body(data-no-tab="")
+    .wrapper
+      #no-blog-alert.modal(tabindex="-1" role="dialog" aria-labelledby="modal__title-no-blog" aria-modal="true")
+        .modal__bg
+        .modal__dialog(role="document")
+          .modal__content
+            header.modal__header
+              h5#modal__title-no-blog.modal__title Sorry
+              button.modal__close(type="button" data-dismiss="modal" aria-label="Close")
+                svg.svg-icon
+                  use(xlink:href=require("./images/icons.svg") + "#close")
+            main.modal__body
+              p The blog isn't ready at the moment but it will be soon. Please check for it later or follow me on any of my social media and I'll let you know
+            footer.modal__footer
+              button(type="button" class="btn-primary" data-dismiss="modal") Got it
+
+      a.btn-primary.blog-btn(href="#" data-toggle="modal" data-target="no-blog-alert") Blog
+      ul.carousel__nav
+        li.carousel__nav__item(data-active="")
+          button(type="button" accesskey="1" title="Go to My story")
+        li.carousel__nav__item
+          button(type="button" accesskey="2" title="Go to Services & skills")
+        li.carousel__nav__item
+          button(type="button" accesskey="3" title="Go to Some of my work")
+        li.carousel__nav__item
+          button(type="button" accesskey="4" title="Go to Contact me")
+
+      section.carousel(role="region" tabindex="-1")
+        .active.carousel__item
+          header.main-header
+              .main-heading.main-heading--end-point
+                h1 My story
+                hr
+          //- end header
+
+          main.row
+            .col-1
+            .col
+              p.carousel__subheading Hi, my name is Ahmed Hamed. I am a web developer & designer from Egypt. I started to design three years ago, but I found my passion in developing web pages. Currently I do both; design & develop as a freelancer. Also I have worked as tutor in one mollion arab coders initiative. I am on my first year at computer science college. I love reading & problem solving
+              include ./includes/gallery
+            .col-md-1
+        //- end carousel__item
+
+        .carousel__item
+          header.main-header
+              .main-heading.main-heading--transition
+                h1 Services & skills
+                hr
+          //- end header
+
+          main.row
+            .col-1
+            .col
+              p.carousel__subheading I can offer you a wide variety of options to design and develop your web page using the latest technology in the field so you could represent your business correctly to your target audience
+              .services-and-skills__content
+                include ./includes/services
+                .divider
+                include ./includes/skillset
+            .col-md-1
+        //- end carousel__item
+
+        .carousel__item
+          header.main-header--no-subheading
+              .main-heading.main-heading--transition
+                h1 Some of my work
+                hr
+          //- end header
+          include ./includes/work-item
+          main.row
+            .col-1
+            ul.col.work-items
+              +work-item({href: "https://www.behance.net/gallery/55537377/Italian-Restaurant", src: require("./images/work-1.jpg"), heading: "Restaurant", category: "web design"})
+              +work-item({href: "https://www.behance.net/gallery/54774567/SEO-Upcoming-Work-Website", src: require("./images/work-2.jpg"), heading: "SEO site", category: "web design"})
+              +work-item({href: "https://www.behance.net/gallery/45528649/Dentist-Website-Free-website-PSD-Template", src: require("./images/work-3.jpg"), heading: "Dentist site", category: "web design"})
+            .col-md-1
+        //- end carousel__item
+        .carousel__item
+          header.main-header--no-subheading
+              .main-heading.main-heading--transition
+                h1 Contact me
+                hr
+          //- end header
+          main.row
+            .col-1
+            .col
+             .contact-me__content
+               include ./includes/contact-info
+               .divider
+               include ./includes/contact-form
+            .col-md-1
+        //- end carousel__item
+      //- end carousel
+      .lang--fixed
+        include ./includes/language-rotated
+      footer.main-footer
+        p.main-footer__rights Ahmad Hamid / All rights reserved
+        include ./includes/social
+        a.main-footer__btn(href="#" data-toggle="modal" data-target="no-blog-alert") Blog
+        include ./includes/language

@@ -1,0 +1,99 @@
+.btn {
+  display: inline-block;
+  font-family: $btn-font-family;
+  font-weight: $btn-font-weight;
+  color: $body-color;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  background-color: transparent;
+  border: 0;
+  padding: 0;
+
+  // Future-proof disabling of clicks on `<a>` elements
+  &.disabled,
+  &:disabled {
+    pointer-events: none;
+  }
+}
+
+.btn-primary {
+
+  @extend .btn;
+  border: $btn-border-width solid theme-color("secondary");
+  @include button-size(
+    $btn-padding-y,
+    $btn-padding-x,
+    $btn-font-size,
+    $btn-line-height,
+    $btn-border-radius
+  );
+  @include transition($btn-transition);
+
+  // the browser supports hover ( it's not a mobile phone ) or it's IE
+  @media all and (hover: hover),
+    (-ms-high-contrast: none),
+    (-ms-high-contrast: active) {
+    @include transition($btn-transition, color 210ms ease-out);
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+
+    &:before {
+      content: "";
+      display: inline-block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(
+        circle,
+        #{theme-color("primary")} 16%,
+        transparent 16.01%
+      );
+      background-repeat: no-repeat;
+      background-position: 50%;
+      z-index: -1;
+      @include transition(opacity 220ms linear, transform 220ms ease-out);
+      transform: scale(0, 0);
+      opacity: 0;
+    }
+    @include hover {
+      text-decoration: none;
+      color: color-yiq(theme-color("primary"));
+      &:before {
+        opacity: 1;
+        transform: scale(6.5, 6.5);
+      }
+    }
+
+  }
+  &:focus,
+  &.focus {
+    outline: 0;
+    box-shadow: $btn-focus-box-shadow;
+  }
+
+  &.disabled,
+  &:disabled {
+    opacity: $btn-disabled-opacity;
+    @include box-shadow(none);
+  }
+}
+
+.btn-primary--lg {
+  @extend .btn-primary;
+  @include button-size(
+    $btn-padding-y-lg,
+    $btn-padding-x-lg,
+    $btn-font-size-lg,
+    $btn-line-height-lg,
+    $btn-border-radius-lg
+  );
+
+  @include transition($btn-transition, color 250ms ease-out);
+  &:before {
+    @include transition(opacity 260ms linear, transform 260ms ease-out);
+  }
+}

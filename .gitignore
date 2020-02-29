@@ -1,0 +1,6 @@
+# ignore node_modules in the root tree
+/node_modules
+
+# ignore dist or build direcotries in the root tree
+/build
+/dist

@@ -1,0 +1,9 @@
+div(class="lang--rotated")
+  - const getIcon = icon => require("../../images/icons.svg") + '#' + icon
+  a.lang__btn(href="../" data-lang="en" aria-label="إلى النخة الانجليزية")
+    svg.icon.svg-icon(focusable="false")
+      use(xlink:href=getIcon("english-rotated"))
+  a.lang__btn(href="./" data-lang="ar" aria-label="إلى النسخة العربية" aria-disabled="true" tabindex="-1")
+    svg.icon.svg-icon(focusable="false")
+      use(xlink:href=getIcon("arabic-rotated"))
+

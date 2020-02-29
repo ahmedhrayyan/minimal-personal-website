@@ -1,0 +1,9 @@
+.contact-form {
+  .item + .item {
+    margin-top: res-unit(28px);
+  }
+}
+
+.contact-form__heading {
+  margin-bottom: res-unit(38px);
+}

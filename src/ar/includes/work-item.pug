@@ -1,0 +1,11 @@
+mixin work-item({className, href, src, heading, category})
+  li.work-item(class= className ? className : '')
+    a.work-item__link(href=href aria-label=`اعرض عمل ${heading} على بيهانس`)
+      img(src=src, alt=`${heading} image`)
+      .work-item--active
+        p.work-item__note اعرض على بيهانس
+          svg.icon.svg-icon
+            use(xlink:href=require("../images/icons.svg") + '#arrow-tall')
+        .work-item--active__content
+          h4.work-item__heading= heading
+          p.work-item__category= category

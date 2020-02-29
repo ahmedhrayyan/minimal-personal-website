@@ -1,0 +1,183 @@
+html, body {
+  height: 100%;
+}
+
+
+.wrapper {
+  @extend .container;
+  min-height: 100%;
+  position: relative;
+  // the next line is for setting the footer at the bottom of the page ( the last value is the minimum expected footer height )
+  padding-bottom: $page-padding-y + $footer-padding-top + $line-height-base * 1rem;
+
+  @include clearfix();
+}
+
+.lang--fixed {
+  display: none; // in small divices;
+  position: absolute;
+  right: 0;
+
+  @include media-breakpoint-up("md") {
+    display: block;
+  }
+
+  > .lang--rotated {
+    position: fixed;
+    top: 50%;
+    z-index: 99;
+    transform: translate(-160%, -50%); // it should have worked with only -100% horizantly... weird
+  }
+}
+
+.carousel {
+  padding-top: $page-padding-y; // add padding to carousel instead of wrapper so when focusing it, page would not be scrolled
+}
+
+.carousel__nav {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%); // it should have worked with only -100% vertically
+  z-index: 99;
+}
+
+.services-and-skills__content {
+  .divider {
+    width: calc(100% - 20px);
+    height: 1px;
+    background: theme-color("divider");
+    margin-top: res-unit(40px);
+    margin-bottom: res-unit(40px);
+  }
+  @include media-breakpoint-up("lg") {
+    display: flex;
+    align-items: center;
+    .divider {
+      flex-shrink: 0;
+      width: 1px;
+      height: 194px;
+      margin: 0 40px;
+    }
+    .services {
+      // because the use of table
+      width: calc(50% - 40px); // 1
+      text-align: right;
+    }
+    .skillset {
+      width: calc(50% - 40px); // 2
+    }
+  }
+}
+
+.main-footer {
+  position: absolute;
+  bottom: 0;
+  // setting width using left & right
+  left: $grid-gutter-width / 2;
+  right: $grid-gutter-width / 2;
+  padding-bottom: $page-padding-y;
+}
+
+.main-header {
+  margin-bottom: $header-margin-bottom;
+}
+
+.main-header--no-subheading {
+  margin-bottom: $carousel-subheading-mb;
+}
+
+.blog-btn {
+  display: none;
+  float: right;
+  position: relative;
+  z-index: 9;
+  margin-top: ($h1-font-size * $headings-line-height - $btn-height) / 2 + $page-padding-y; // h1 height - btn height ( for centring vertically )
+
+  @include media-breakpoint-up("md") {
+    display: inline-block;
+  }
+}
+
+.work-items {
+  list-style-type: none;
+  margin-bottom: -$work-item-margin-y;
+  .work-item {
+    margin-bottom: $work-item-margin-y;
+    width: 100%;
+  }
+  @include media-breakpoint-up("lg") {
+    .work-item:first-child {
+      margin-right: $work-item-margin-x;
+    }
+
+    .work-item:nth-child(odd) {
+      float: left;
+    }
+
+    .work-item {
+      width: calc(50% - #{$work-item-margin-x / 2});
+    }
+  }
+}
+
+.contact-me__content {
+  .divider {
+    width: calc(100% - 20px);
+    height: 1px;
+    background: theme-color("divider");
+    margin-top: res-unit(40px);
+    margin-bottom: res-unit(40px);
+  }
+  @include media-breakpoint-up("lg") {
+    display: flex;
+    .divider {
+      flex-shrink: 0;
+      align-self: center;
+      width: 1px;
+      height: 360px;
+      margin: 0 40px;
+    }
+    .contact-info, .contact-form {
+      // for ie 10
+      width: calc(50% - 40px);
+    }
+    .contact-info {
+      text-align: right;
+    }
+  }
+}
+
+html[lang="ar"] {
+  .blog-btn {
+    float: left;
+  }
+
+  .lang--fixed {
+    right: 100%;
+
+    > .lang--rotated {
+      transform: translate(160%, -50%); // it should have worked with only -100% horizantly... weird
+    }
+  }
+
+  @include media-breakpoint-up("md") {
+    .work-items >  {
+      .work-item:first-child {
+        margin-right: 0;
+        margin-left: $work-item-margin-x;
+      }
+      .work-item:nth-child(odd) {
+        float: right;
+      }
+    }
+  }
+
+  @include media-breakpoint-up("lg") {
+    .services-and-skills__content > .services {
+      text-align: left;
+    }
+    .contact-me__content > .contact-info {
+      text-align: left;
+    }
+  }
+}

@@ -1,0 +1,23 @@
+#no-contact-form.modal(tabindex="-1" role="dialog" aria-labelledby="modal__title-no-contact" aria-modal="true")
+  .modal__bg
+  .modal__dialog(role="document")
+    .modal__content
+      header.modal__header
+        h5#modal__title-no-blog.modal__title أعتذر
+        button.modal__close(type="button" data-dismiss="modal" aria-label="أغلق")
+          svg.svg-icon
+            use(xlink:href=require("../../images/icons.svg") + "#close")
+      main.modal__body
+        p نموذج الاتصال لا يعمل حالياً، أعتذر عن ذلك. إذا كنت تريد الاتصال بي، برجاء ارسل إلي رسالة علي
+          |
+          |
+          a(href="mailto:ahamidEng@outlook.com") ahamidEng@outlook.com
+        footer.modal__footer
+        button(type="button" class="btn-primary" data-dismiss="modal") أتفهم ذلك
+.contact-form
+  h3.contact-form__heading أرسل إلي رسالة!
+  form(autocomplete="off" novalidate="" data-need-validation="" data-invalid-feedback="الرجاء ادخال بيانات صحيحة هنا" data-empty-feedback="الرجاء ملء هذه الخانة")
+    input.form-control--lg.item(type="text" placeholder="الااسم" required="")
+    input.form-control--lg.item(type="email" placeholder="البريد الإلكتروني" required="")
+    textarea.form-control--lg.item(placeholder="رسالتك..." required="")
+    button.btn-primary--lg.item(type="submit") أرسل رسالتك

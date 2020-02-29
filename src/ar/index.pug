@@ -1,0 +1,111 @@
+doctype html
+html(lang="ar")
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
+    meta(name="viewport", content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0")
+    meta(name="description" content="Discover more about Ahmad Hamid, a web developer & designer and a computer science student")
+    meta(name="author" content="Ahmad Hamid")
+    meta(name="keywords" content="HTML, CSS, JAVASCRIT, REACT, WEB DEVELOPER, WEB DESIGNER, PORTFOLIO, PERSONAL WEBSITE")
+    link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Harmattan|Reem+Kufi&display=swap")
+
+    title أحمد حامد
+  body(data-no-tab="")
+    .wrapper
+      #no-blog-alert.modal(tabindex="-1" role="dialog" aria-labelledby="modal__title-no-blog" aria-modal="true")
+        .modal__bg
+        .modal__dialog(role="document")
+          .modal__content
+            header.modal__header
+              h5#modal__title-no-blog.modal__title أعتذر
+              button.modal__close(type="button" data-dismiss="modal" aria-label="أغلق")
+                svg.svg-icon
+                  use(xlink:href=require("../images/icons.svg") + "#close")
+            main.modal__body
+              p المدونة ليس جاهزة في هذه اللحظة، ولكنها سوف تكون قريباً. برجاء التحقق منها في وقت لاحق او تابعني على اي منصة من منصات التواصل الاجتماعي وانا سوف اعلمك
+            footer.modal__footer
+              button(type="button" class="btn-primary" data-dismiss="modal") أتفهم الأمر
+
+      a.btn-primary.blog-btn(href="#" data-toggle="modal" data-target="no-blog-alert") مدونة
+      ul.carousel__nav
+        li.carousel__nav__item(data-active="")
+          button(type="button" accesskey="1" title="اذهب إلى قصتي")
+        li.carousel__nav__item
+          button(type="button" accesskey="2" title="اذهب إلى الخدمات و المهارات")
+        li.carousel__nav__item
+          button(type="button" accesskey="3" title="اذهب إلى بعص من أعمالي")
+        li.carousel__nav__item
+          button(type="button" accesskey="4" title="اذهب إلى اتصل بي")
+
+      section.carousel(role="region" tabindex="-1")
+        .active.carousel__item
+          header.main-header
+              .main-heading.main-heading--end-point
+                h1 قصتي
+                hr
+          //- end header
+
+          main.row
+            .col-1
+            .col
+              p.carousel__subheading مرحباً، اسمي أحمد حامد. انا مطور ومصمم ويب من مصر. منذ ثلاث سنوات بدأت بالتصميم، ولكني وجدت شغفي في تطوير صفحات الويب. حالياً أقوم بكلا الأمرين؛ التصميم والتطوير كعامل حر على الأنترنت. عملت ايضاً كمدرس للبرمجة في مبادرة مليون مبرمج عربي. أنا في سنتي الأولى بكلية علوم الحاسب. أحب القراءة كثير كذلك حل المشكلات
+              include ./includes/gallery
+            .col-md-1
+        //- end carousel__item
+        .carousel__item
+          header.main-header
+              .main-heading.main-heading--transition
+                h1 الخدمات والمهارات
+                hr
+          //- end header
+
+          main.row
+            .col-1
+            .col
+              p.carousel__subheading أستطيع أن اقدم لك مجموعة واسعة من الخيارات لتصميم وتطوير صفحة الويب الخاصة بك باستخدام أحدث التقنيات في المجال حتى تتمكن من تمثيل العمل الخاص بك بشكل صحيح لجمهورك المستهدف
+              .services-and-skills__content
+                include ./includes/services
+                .divider
+                include ./includes/skillset
+            .col-md-1
+        //- end carousel__item
+        .carousel__item
+          header.main-header--no-subheading
+              .main-heading.main-heading--transition
+                h1 بعض من أعمالي
+                hr
+          //- end header
+          include ./includes/work-item
+          main.row
+            .col-1
+            ul.col.work-items
+
+              +work-item({href: "https://www.behance.net/gallery/55537377/Italian-Restaurant", src: require("../images/work-1.jpg"), heading: "موقع مطعم", category: "تصميم ويب"})
+              +work-item({href: "https://www.behance.net/gallery/54774567/SEO-Upcoming-Work-Website", src: require("../images/work-2.jpg"), heading: "موقع سيو", category: "تصميم ويب"})
+              +work-item({href: "https://www.behance.net/gallery/45528649/Dentist-Website-Free-website-PSD-Template", src: require("../images/work-3.jpg"), heading: "موقع عيادة أسنان", category: "تصميم ويب"})
+            .col-md-1
+        //- end carousel__item
+        .carousel__item
+          header.main-header--no-subheading
+              .main-heading.main-heading--transition
+                h1 اتصل بي
+                hr
+          //- end header
+          main.row
+            .col-1
+            .col
+             .contact-me__content
+               include ./includes/contact-info
+               .divider
+               include ./includes/contact-form
+            .col-md-1
+        //- end carousel__item
+      //- end carousel
+
+      .lang--fixed
+        include ./includes/language-rotated
+      footer.main-footer
+        p.main-footer__rights أحمد حامد \ جميع الحقوق محفوظة
+        include ./includes/social
+        a.main-footer__btn(href="#" data-toggle="modal" data-target="no-blog-alert") مدونة
+        include ./includes/language

@@ -1,0 +1,52 @@
+.skillset {
+  // width: 100%;
+  .sr-only {
+    @include sr-only();
+  }
+
+  caption.sr-only {
+    position: static; // fix bug when making caption position absolute
+  }
+}
+
+.skill__type {
+  // fit this cell to its content
+  width: 1%; // 1
+  white-space: nowrap; // 2
+  padding-top: $skill-padding-y;
+  padding-bottom: $skill-padding-y;
+  font-weight: normal;
+}
+
+.skill__value__bg {
+  margin-left: res-unit(40px);
+  height: 6px;
+  background: theme-color("divider");
+  position: relative;
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: theme-color("primary");
+  }
+
+  @each $skill, $pct in $skills-pct {
+    &[data-pct="#{$pct}"]:after {
+      width: $pct;
+    }
+  }
+}
+
+html[lang="ar"] {
+  .skill__value__bg {
+    margin-left: 0;
+    margin-right: res-unit(40px);
+    &:after {
+      left: auto;
+      right: 0;
+    }
+  }
+}

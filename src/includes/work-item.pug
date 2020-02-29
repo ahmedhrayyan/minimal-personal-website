@@ -1,0 +1,11 @@
+mixin work-item({className, href, src, heading, category})
+  li.work-item(class= className ? className : '')
+    a.work-item__link(href=href aria-label=`View ${heading} work on Behance`)
+      img(src=src, alt=`${heading} image`)
+      .work-item--active
+        p.work-item__note view on behance
+          svg.icon.svg-icon
+            use(xlink:href=require("./images/icons.svg") + '#arrow-tall')
+        .work-item--active__content
+          h4.work-item__heading= heading
+          p.work-item__category= category

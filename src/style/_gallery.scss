@@ -1,0 +1,125 @@
+.gallery {
+  @include clearfix();
+}
+
+.gallery__items {
+  @include clearfix();
+  position: relative;
+}
+
+.gallery__item {
+  display: none;
+  border: $gallery-item-border;
+  @include transition($gallery-transition);
+
+  // this is for transition logic
+  float: left;
+  width: 100%;
+  backface-visibility: hidden;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  // more than one item
+  @include media-breakpoint-up("md") {
+    width: calc(50% - #{$gallery-item-margin});
+    &.active + & {
+      float: right;
+    }
+    .active.gallery__item--left + & {
+      float: left;
+    }
+    .gallery__item--prev + & {
+      float: right;
+    }
+  }
+}
+
+.gallery__item.active,
+.gallery__item--next,
+.gallery__item--prev {
+  display: block;
+}
+
+.gallery__item--next,
+.gallery__item--prev,
+.gallery__item--m-left,
+.gallery__item--m-right {
+  will-change: transform;
+} // because these classes will be added before the beginning of the transition
+
+// the first selector is for giving the next item a style then remove it by adding gallery__item--left to it (for transition)
+.gallery__item--next:not(.gallery__item--left),
+.active.gallery__item--right {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+// the first selector is for giving the prev item a style then remove it by adding gallery__item--right to it (for transition)
+.gallery__item--prev:not(.gallery__item--right),
+.active.gallery__item--left {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.active.gallery__item--left,
+.active.gallery__item--right {
+  position: absolute;
+}
+.active.gallery__item--left {
+  left: -$gallery-item-margin * 2;
+}
+.active.gallery__item--right {
+  right: -$gallery-item-margin * 2;
+}
+
+// for the middle item
+.gallery__item--m-left,
+.gallery__item--m-right {
+  transition-property: none;
+}
+.gallery__item--m-left {
+  transform: translateX(100%);
+}
+.gallery__item--m-right {
+  transform: translateX(-100%);
+}
+
+.gallery__control {
+  @extend .btn;
+  margin-top: $gallery-control-margin-y;
+  float: right;
+
+  .sr-only {
+    @include sr-only;
+  }
+
+  .icon {
+    width: 28px;
+    height: 16px;
+    fill: none;
+    stroke: $gallery-control-bg;
+    stroke-width: $gallery-control-stroke-width;
+
+    &.flipped {
+      transform: rotate(180deg); // the arrow icon direction is right
+    }
+  }
+
+  &[disabled] .icon {
+    stroke: $gallery-disabled-control-bg;
+  }
+
+  &[data-to="prev"] {
+    margin-right: -4px;
+    transform: translateY(90%);
+  }
+}
+
+html[lang="ar"] {
+  .gallery__control {
+    float: left;
+  }
+}
